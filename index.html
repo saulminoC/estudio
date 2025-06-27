@@ -1,0 +1,335 @@
+<?php
+session_start();
+
+// Verifica si el usuario está logueado
+$isLoggedIn = isset($_SESSION['usuario']);
+?>
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudio Fotográfico - Capturamos tus momentos especiales</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/estudio/Frontend/css/style.css">
+    <script src="/estudio/Frontend/js/script.js" defer></script>
+
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-camera"></i>
+                Estudio Fotográfico
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#portafolio">Portafolio</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <div class="user-actions">
+                <!-- El botón que abre el modal -->
+                <a href="#" id="auth-btn" class="btn btn-secondary">
+                    <i class="fas fa-user"></i>
+                    Iniciar Sesión
+                </a>
+                <a href="#" class="btn btn-primary">
+                    <i class="fas fa-calendar"></i>
+                    Reservar
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Capturamos tus momentos más especiales</h1>
+            <p>Somos un estudio fotográfico profesional especializado en crear recuerdos inolvidables. Desde bodas hasta retratos, cada imagen cuenta una historia única.</p>
+            <div class="hero-buttons">
+                <a href="#servicios" class="btn btn-primary btn-large">
+                    <i class="fas fa-images"></i>
+                    Ver Servicios
+                </a>
+                <a href="#portafolio" class="btn btn-secondary btn-large">
+                    <i class="fas fa-play"></i>
+                    Ver Portafolio
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios -->
+    <section class="services" id="servicios">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>Nuestros Servicios</h2>
+                <p>Ofrecemos una amplia gama de servicios fotográficos para todas tus necesidades especiales</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Fotografía de Bodas</h3>
+                    <p>Capturamos cada momento especial de tu día más importante con un estilo único y profesional.</p>
+                    <a href="#" class="btn btn-primary">Ver Paquetes</a>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <h3>Retratos Familiares</h3>
+                    <p>Sesiones familiares que reflejan la personalidad y conexión única de cada familia.</p>
+                    <a href="#" class="btn btn-primary">Ver Paquetes</a>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-baby"></i>
+                    </div>
+                    <h3>Fotografía Infantil</h3>
+                    <p>Capturamos la espontaneidad y alegría de los más pequeños en sesiones divertidas y naturales.</p>
+                    <a href="#" class="btn btn-primary">Ver Paquetes</a>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Graduaciones</h3>
+                    <p>Inmortalizamos este momento tan importante de logro académico con fotografías memorables.</p>
+                    <a href="#" class="btn btn-primary">Ver Paquetes</a>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Fotografía Corporativa</h3>
+                    <p>Retratos profesionales y fotografía de eventos corporativos que reflejan la imagen de tu empresa.</p>
+                    <a href="#" class="btn btn-primary">Ver Paquetes</a>
+                </div>
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <h3>Fotografía de Producto</h3>
+                    <p>Imágenes de alta calidad para catálogos, e-commerce y marketing de productos.</p>
+                    <a href="#" class="btn btn-primary">Ver Paquetes</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portafolio Preview -->
+    <section class="portfolio-preview" id="portafolio">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>Nuestro Portafolio</h2>
+                <p>Explora algunos de nuestros trabajos más destacados</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item animate-on-scroll">
+                    <div class="portfolio-overlay">
+                        <div>
+                            <i class="fas fa-heart" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                            <div>Bodas</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item animate-on-scroll">
+                    <div class="portfolio-overlay">
+                        <div>
+                            <i class="fas fa-user-friends" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                            <div>Retratos</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item animate-on-scroll">
+                    <div class="portfolio-overlay">
+                        <div>
+                            <i class="fas fa-baby" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                            <div>Infantil</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portfolio-item animate-on-scroll">
+                    <div class="portfolio-overlay">
+                        <div>
+                            <i class="fas fa-briefcase" style="font-size: 2rem; margin-bottom: 0.5rem;"></i>
+                            <div>Corporativo</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#" class="btn btn-primary btn-large">
+                    <i class="fas fa-images"></i>
+                    Ver Portafolio Completo
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title animate-on-scroll">
+                <h2>Lo que dicen nuestros clientes</h2>
+                <p>Testimonios reales de clientes satisfechos</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Un trabajo excepcional en nuestra boda. Capturaron cada momento especial y las fotos superaron nuestras expectativas. ¡Altamente recomendado!"</p>
+                    <div class="testimonial-author">- María y Carlos González</div>
+                </div>
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Profesionales, creativos y con una paciencia increíble con los niños. Las fotos familiares quedaron hermosas. Definitivamente volveremos."</p>
+                    <div class="testimonial-author">- Ana Rodríguez</div>
+                </div>
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Excelente servicio para nuestras fotos corporativas. Muy profesionales y entregaron el trabajo en tiempo récord. Quedamos muy satisfechos."</p>
+                    <div class="testimonial-author">- Empresa TechSolutions</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="animate-on-scroll">
+                <h2>¿Listo para capturar tus momentos especiales?</h2>
+                <p>Contáctanos hoy y creemos juntos recuerdos inolvidables</p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="#" class="btn btn-primary btn-large">
+                        <i class="fas fa-calendar"></i>
+                        Reservar Sesión
+                    </a>
+                    <a href="#" class="btn btn-secondary btn-large">
+                        <i class="fas fa-phone"></i>
+                        Contactar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Modal de Iniciar Sesión -->
+<div id="loginModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Iniciar Sesión</h2>
+        <form action="Backend/login.php" method="POST">
+            <div class="form-group">
+                <label for="login-email">Correo Electrónico</label>
+                <input type="email" id="login-email" name="email" required placeholder="Ingresa tu correo">
+            </div>
+            <div class="form-group">
+                <label for="login-password">Contraseña</label>
+                <input type="password" id="login-password" name="password" required placeholder="Ingresa tu contraseña">
+            </div>
+            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+        </form>
+
+
+
+        <p>No tienes cuenta? <a href="#" id="show-register">Regístrate aquí</a></p>
+    </div>
+</div>
+
+<!-- Modal de Registro -->
+<div id="registerModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Regístrate</h2>
+        <form method="POST" action="Backend/registro.php">
+            <input type="text" name="nombre" placeholder="Nombre completo" required><br>
+            <input type="email" name="correo_electronico" placeholder="Correo electrónico" required><br>
+            <input type="password" name="contraseña" placeholder="Contraseña" required><br>
+            <button type="submit">Registrar</button>
+        </form>
+        <p>¿Ya tienes cuenta? <a href="#" id="show-login">Inicia sesión aquí</a></p>
+    </div>
+</div>
+
+    
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Estudio Fotográfico</h3>
+                    <p>Somos un estudio fotográfico profesional dedicado a capturar tus momentos más especiales con la más alta calidad y creatividad.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Servicios</h3>
+                    <p><a href="#">Fotografía de Bodas</a></p>
+                    <p><a href="#">Retratos Familiares</a></p>
+                    <p><a href="#">Fotografía Infantil</a></p>
+                    <p><a href="#">Graduaciones</a></p>
+                    <p><a href="#">Fotografía Corporativa</a></p>
+                    <p><a href="#">Fotografía de Producto</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <p><a href="#">Inicio</a></p>
+                    <p><a href="#">Portafolio</a></p>
+                    <p><a href="#">Paquetes</a></p>
+                    <p><a href="#">Blog</a></p>
+                    <p><a href="#">Contacto</a></p>
+                    <p><a href="#">Zona Cliente</a></p>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Calle Principal 123, Ciudad</p>
+                    <p><i class="fas fa-phone"></i> +52 222 123 4567</p>
+                    <p><i class="fas fa-envelope"></i> info@estudiofotografico.com</p>
+                    <p><i class="fas fa-clock"></i> Lun - Sáb: 9:00 AM - 6:00 PM</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Estudio Fotográfico. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget">
+        <i class="fas fa-comments"></i>
+    </div>
+3
+</body>
+</html>
