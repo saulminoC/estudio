@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Studio Lens</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #33303d;
+            --secondary: #c0a080;
+            --light: #f8f5f2;
+            --dark: #1a1a24;
+            --accent: #a67c52;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --info: #17a2b8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .dashboard-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background-color: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 0 1.5rem;
+        }
+        
+        .logo h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+        
+        .nav-menu {
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .nav-icon {
+            margin-right: 0.8rem;
+            font-size: 1.2rem;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 2rem;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        /* Dashboard Content */
+        .content-section {
+            display: none;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+        }
+        
+        .stat-icon.appointments { background-color: rgba(40, 167, 69, 0.1); color: var(--success); }
+        .stat-icon.packages { background-color: rgba(192, 160, 128, 0.1); color: var(--secondary); }
+        .stat-icon.photos { background-color: rgba(23, 162, 184, 0.1); color: var(--info); }
+        .stat-icon.contacts { background-color: rgba(255, 193, 7, 0.1); color: var(--warning); }
+        
+        .stat-info h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.2rem;
+        }
+        
+        .stat-info p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Tables */
+        .data-table {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .table-header {
+            padding: 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .table-header h2 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--accent);
+        }
+        
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .btn-warning {
+            background-color: var(--warning);
+            color: var(--dark);
+        }
+        
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+        
+        .btn-sm {
+            padding: 0.3rem 0.6rem;
+            font-size: 0.8rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background-color: var(--light);
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        tr:hover {
+            background-color: rgba(192, 160, 128, 0.05);
+        }
+        
+        /* Status badges */
+        .status-badge {
+            padding: 0.2rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-confirmed { background-color: rgba(40, 167, 69, 0.1); color: var(--success); }
+        .status-pending { background-color: rgba(255, 193, 7, 0.1); color: var(--warning); }
+        .status-cancelled { background-color: rgba(220, 53, 69, 0.1); color: var(--danger); }
+        .status-published { background-color: rgba(23, 162, 184, 0.1); color: var(--info); }
+        .status-draft { background-color: rgba(108, 117, 125, 0.1); color: #666; }
+        
+        /* Forms */
+        .form-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+        
+        /* Modal styles for quick actions */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: var(--danger);
+        }
+        
+        /* Gallery grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        
+        /* File upload area */
+        .upload-area {
+            border: 2px dashed var(--secondary);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            background-color: rgba(192, 160, 128, 0.05);
+            margin: 1rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .upload-area:hover {
+            background-color: rgba(192, 160, 128, 0.1);
+        }
+        
+        .upload-area.dragover {
+            border-color: var(--accent);
+            background-color: rgba(166, 124, 82, 0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>Studio Lens</h1>
+                <p>Panel Administrativo</p>
+            </div>
+            
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" data-section="dashboard">
+                        <span class="nav-icon">📊</span>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="appointments">
+                        <span class="nav-icon">📅</span>
+                        Citas y Reservas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="packages">
+                        <span class="nav-icon">📦</span>
+                        Paquetes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="gallery">
+                        <span class="nav-icon">🖼️</span>
+                        Galerías
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="blog">
+                        <span class="nav-icon">📝</span>
+                        Blog/Noticias
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="contacts">
+                        <span class="nav-icon">📧</span>
+                        Consultas
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-section="albums">
+                        <span class="nav-icon">📚</span>
+                        Álbumes por Cliente
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon">⚙️</span>
+                        Configuración
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <span class="nav-icon">🚪</span>
+                        Cerrar Sesión
+                    </a>
+                </li>
+            </ul>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <h1 id="page-title">Dashboard Principal</h1>
+                <div class="user-info">
+                    <span>Bienvenido, Admin</span>
+                    <div class="user-avatar">A</div>
+                </div>
+            </div>
+            
+            <!-- Dashboard Overview -->
+            <section id="dashboard" class="content-section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon appointments">📅</div>
+                        <div class="stat-info">
+                            <h3>12</h3>
+                            <p>Citas esta semana</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon packages">📦</div>
+                        <div class="stat-info">
+                            <h3>5</h3>
+                            <p>Paquetes activos</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon photos">🖼️</div>
+                        <div class="stat-info">
+                            <h3>1,247</h3>
+                            <p>Fotos en galerías</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon contacts">📧</div>
+                        <div class="stat-info">
+                            <h3>8</h3>
+                            <p>Consultas pendientes</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="data-table">
+                    <div class="table-header">
+                        <h2>Próximas Citas</h2>
+                        <a href="#" class="btn btn-primary">Ver todas</a>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Servicio</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>María González</td>
+                                <td>Sesión de Pareja</td>
+                                <td>15 Jul, 2025 - 10:00 AM</td>
+                                <td><span class="status-badge status-confirmed">Confirmada</span></td>
+                            </tr>
+                            <tr>
+                                <td>Carlos Ruiz</td>
+                                <td>Fotografía Corporativa</td>
+                                <td>16 Jul, 2025 - 2:00 PM</td>
+                                <td><span class="status-badge status-pending">Pendiente</span></td>
+                            </tr>
+                            <tr>
+                                <td>Ana y Roberto</td>
+                                <td>Pre-boda</td>
+                                <td>18 Jul, 2025 - 4:00 PM</td>
+                                <td><span class="status-badge status-confirmed">Confirmada</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Appointments Section -->
+            <section id="appointments" class="content-section">
+                <div class="data-table">
+                    <div class="table-header">
+                        <h2>Gestión de Citas y Reservas</h2>
+                        <button class="btn btn-primary" onclick="openModal('appointmentModal')">Nueva Cita</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Contacto</th>
+                                <th>Servicio</th>
+                                <th>Fecha</th>
+                                <th>Hora</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>María González</td>
+                                <td>maria@email.com<br>(555) 123-4567</td>
+                                <td>Sesión de Pareja</td>
+                                <td>15 Jul, 2025</td>
+                                <td>10:00 AM</td>
+                                <td><span class="status-badge status-confirmed">Confirmada</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">Editar</button>
+                                    <button class="btn btn-sm btn-danger">Cancelar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Carlos Ruiz</td>
+                                <td>carlos@empresa.com<br>(555) 987-6543</td>
+                                <td>Fotografía Corporativa</td>
+                                <td>16 Jul, 2025</td>
+                                <td>2:00 PM</td>
+                                <td><span class="status-badge status-pending">Pendiente</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-success">Confirmar</button>
+                                    <button class="btn btn-sm btn-primary">Editar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Packages Section -->
+            <section id="packages" class="content-section">
+                <div class="data-table">
+                    <div class="table-header">
+                        <h2>Gestión de Paquetes</h2>
+                        <button class="btn btn-primary" onclick="openModal('packageModal')">Nuevo Paquete</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre del Paquete</th>
+                                <th>Precio</th>
+                                <th>Duración</th>
+                                <th>Incluye</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Boda Completa</td>
+                                <td>$2,500</td>
+                                <td>8 horas</td>
+                                <td>Ceremonia, recepción, 300+ fotos editadas</td>
+                                <td><span class="status-badge status-published">Activo</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">Editar</button>
+                                    <button class="btn btn-sm btn-warning">Pausar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sesión Familiar</td>
+                                <td>$350</td>
+                                <td>2 horas</td>
+                                <td>Sesión exterior, 50+ fotos editadas</td>
+                                <td><span class="status-badge status-published">Activo</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">Editar</button>
+                                    <button class="btn btn-sm btn-warning">Pausar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Gallery Section -->
+            <section id="gallery" class="content-section">
+                <div class="form-container">
+                    <h2>Gestión de Galerías</h2>
+                    <div class="upload-area" onclick="document.getElementById('file-input').click()">
+                        <p>📸 Arrastra y suelta imágenes aquí o haz clic para seleccionar</p>
+                        <input type="file" id="file-input" multiple accept="image/*" style="display: none;">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Categoría de la galería:</label>
+                        <select class="form-control">
+                            <option>Bodas</option>
+                            <option>Retratos Familiares</option>
+                            <option>Sesiones Profesionales</option>
+                            <option>Productos</option>
+                            <option>Eventos</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="data-table">
+                    <div class="table-header">
+                        <h2>Galerías Existentes</h2>
+                    </div>
+                    <div class="gallery-grid">
+                        <div class="gallery-item">
+                            <img src="https://picsum.photos/300/300?random=1" alt="Galería 1">
+                            <div class="gallery-overlay">
+                                <button class="btn btn-primary btn-sm">Ver Galería</button>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://picsum.photos/300/300?random=2" alt="Galería 2">
+                            <div class="gallery-overlay">
+                                <button class="btn btn-primary btn-sm">Ver Galería</button>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://picsum.photos/300/300?random=3" alt="Galería 3">
+                            <div class="gallery-overlay">
+                                <button class="btn btn-primary btn-sm">Ver Galería</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Blog Section -->
+            <section id="blog" class="content-section">
+                <div class="data-table">
+                    <div class="table-header">
+                        <h2>Gestión de Blog y Noticias</h2>
+                        <button class="btn btn-primary" onclick="openModal('blogModal')">Nueva Entrada</button>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Título</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
+                                <th>Vistas</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Tendencias en Fotografía de Bodas 2025</td>
+                                <td>20 Jun, 2025</td>
+                                <td><span class="status-badge status-published">Publicado</span></td>
+                                <td>342</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">Editar</button>
+                                    <button class="btn btn-sm btn-warning">Despublicar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Consejos para Sesiones Familiares</td>
+                                <td>15 Jun, 2025</td>
+                                <td><span class="status-badge status-draft">Borrador</span></td>
+                                <td>0</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">Editar</button>
+                                    <button class="btn btn-sm btn-success">Publicar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Contacts Section -->
+            <section id="contacts" class="content-section">
+                <div class="data-table">
+                    <div class="table-header">
+                        <h2>Consultas Recibidas</h2>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Servicio</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Laura Martínez</td>
+                                <td>laura@email.com</td>
+                                <td>Fotografía de Productos</td>
+                                <td>28 Jun, 2025</td>
+                                <td><span class="status-badge status-pending">Pendiente</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">Responder</button>
+                                    <button class="btn btn-sm btn-success">Crear Cita</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Pedro Sánchez</td>
+                                <td>pedro@email.com</td>
+                                <td>Boda</td>
+                                <td>27 Jun, 2025</td>
+                                <td><span class="status-badge status-confirmed">Respondido</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">Ver Conversación</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Albums Section -->
+            <section id="albums" class="content-section">
+                <div class="form-container">
+                    <h2>Cargar Álbum por Cliente</h2>
+                    <div class="form-group">
+                        <label>Seleccionar Cliente:</label>
+                        <select class="form-control">
+                            <option>María González - Sesión de Pareja</option>
+                            <option>Carlos Ruiz - Fotografía Corporativa</option>
+                            <option>Ana y Roberto - Pre-boda</option>
+                        </select>
+                    </div>
+                    
+                    <div class="upload-area">
+                        <p>📁 Cargar álbum completo para el cliente seleccionado</p>
+                        <input type="file" multiple accept="image/*" style="display: none;">
+                    </div>
+                </div>
+                
+                <div class="data-table">
+                    <div class="table-header">
+                        <h2>Álbumes por Cliente</h2>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Sesión</th>
+                                <th>Fecha Sesión</th>
+                                <th>Fotos</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>María González</td>
+                                <td>Sesión de Pareja</td>
+                                <td>15 Jul, 2025</td>
+                                <td>85 fotos</td>
+                                <td><span class="status-badge status-published">Entregado</span></td>
+                                <td>
+                                    <button
+                                                                    <td>
+                                    <button class="btn btn-sm btn-primary">Ver Álbum</button>
+                                    <button class="btn btn-sm btn-warning">Compartir</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Carlos Ruiz</td>
+                                <td>Fotografía Corporativa</td>
+                                <td>10 Jul, 2025</td>
+                                <td>120 fotos</td>
+                                <td><span class="status-badge status-pending">En Edición</span></td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">Previsualizar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
+            <!-- Modals -->
+            <!-- Appointment Modal -->
+            <div id="appointmentModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('appointmentModal')">&times;</span>
+                    <h2>Nueva Cita</h2>
+                    <form>
+                        <div class="form-group">
+                            <label>Nombre del Cliente</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono</label>
+                            <input type="tel" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Servicio</label>
+                            <select class="form-control" required>
+                                <option value="">Seleccionar servicio...</option>
+                                <option>Sesión de Pareja</option>
+                                <option>Fotografía Corporativa</option>
+                                <option>Pre-boda</option>
+                                <option>Retrato Familiar</option>
+                                <option>Fotografía de Productos</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Fecha</label>
+                            <input type="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Hora</label>
+                            <input type="time" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Notas adicionales</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Cita</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Package Modal -->
+            <div id="packageModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('packageModal')">&times;</span>
+                    <h2>Nuevo Paquete</h2>
+                    <form>
+                        <div class="form-group">
+                            <label>Nombre del Paquete</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Descripción</label>
+                            <textarea class="form-control" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Precio ($)</label>
+                            <input type="number" class="form-control" step="0.01" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Duración (horas)</label>
+                            <input type="number" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Incluye (separar por comas)</label>
+                            <textarea class="form-control" rows="3" placeholder="Ej: 50 fotos editadas, 2 cambios de vestuario, etc."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Estado</label>
+                            <select class="form-control">
+                                <option value="published">Activo</option>
+                                <option value="draft">Inactivo</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar Paquete</button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Blog Modal -->
+            <div id="blogModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal('blogModal')">&times;</span>
+                    <h2>Nueva Entrada de Blog</h2>
+                    <form>
+                        <div class="form-group">
+                            <label>Título</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Contenido</label>
+                            <textarea class="form-control" rows="8" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Imagen destacada</label>
+                            <input type="file" class="form-control" accept="image/*">
+                        </div>
+                        <div class="form-group">
+                            <label>Categorías</label>
+                            <select class="form-control" multiple>
+                                <option>Tendencias</option>
+                                <option>Consejos</option>
+                                <option>Eventos</option>
+                                <option>Tutoriales</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Estado</label>
+                            <select class="form-control">
+                                <option value="published">Publicado</option>
+                                <option value="draft">Borrador</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Publicar Entrada</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        // Navigation functionality
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links and sections
+                document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active'));
+                document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Show corresponding section
+                const sectionId = this.getAttribute('data-section');
+                if (sectionId) {
+                    document.getElementById(sectionId).classList.add('active');
+                    document.getElementById('page-title').textContent = this.textContent.trim();
+                }
+            });
+        });
+        
+        // Modal functionality
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+        
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            document.querySelectorAll('.modal').forEach(modal => {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+        
+        // Drag and drop for upload areas
+        document.querySelectorAll('.upload-area').forEach(area => {
+            area.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                area.classList.add('dragover');
+            });
+            
+            area.addEventListener('dragleave', () => {
+                area.classList.remove('dragover');
+            });
+            
+            area.addEventListener('drop', (e) => {
+                e.preventDefault();
+                area.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                handleFiles(files);
+            });
+        });
+        
+        function handleFiles(files) {
+            console.log('Files uploaded:', files);
+            // Here you would handle the file upload process
+            alert(`${files.length} archivo(s) seleccionado(s) para subir`);
+        }
+        
+        // File input change handler
+        document.getElementById('file-input').addEventListener('change', function() {
+            handleFiles(this.files);
+        });
+    </script>
+</body>
+</html>
