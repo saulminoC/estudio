@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nosotros | Studio Lens</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #33303d;
+            --secondary: #c0a080;
+            --light: #f8f5f2;
+            --dark: #1a1a24;
+            --accent: #a67c52;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Raleway', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: var(--light);
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(51, 48, 61, 0.9);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            margin-left: 0.5rem;
+            color: white;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 5%;
+        }
+        
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                        url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f073f564-1741-4552-85f8-6c8e19bc92b7.png') no-repeat center center/cover;
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid var(--secondary);
+        }
+        
+        .cta-button:hover {
+            background-color: transparent;
+            color: white;
+        }
+        
+        /* About Section */
+        .about-expanded {
+            padding: 5rem 5%;
+            background-color: white;
+            text-align: center;
+        }
+        
+        .team-section {
+            padding: 5rem 0;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .team-member {
+            background-color: var(--light);
+            padding: 2rem;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            border: 3px solid var(--secondary);
+        }
+        
+        .about {
+            padding: 5rem 5%;
+            display: flex;
+            align-items: center;
+            background-color: white;
+        }
+        
+        .about-content {
+            flex: 1;
+            padding-right: 3rem;
+        }
+        
+        .about h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .about p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-signature {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            margin-top: 1.5rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 5rem 5%;
+            background-color: var(--light);
+            text-align: center;
+        }
+        
+        .services h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 3rem;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .service-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .service-card p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+        
+        .service-link:hover {
+            color: var(--accent);
+        }
+        
+        /* Portfolio Preview */
+        .portfolio-preview {
+            padding: 5rem 5%;
+            background-color: white;
+            text-align: center;
+        }
+        
+        .portfolio-preview h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 3rem;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            aspect-ratio: 4/5;
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            transition: bottom 0.3s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            bottom: 0;
+        }
+        
+        .portfolio-overlay h3 {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Full Portfolio */
+        .portfolio-full {
+            padding: 5rem 5%;
+            background-color: white;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            border-radius: 5px;
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-overlay h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .view-button {
+            margin-top: 1rem;
+            padding: 0.5rem 1.5rem;
+            background-color: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .view-button:hover {
+            background-color: var(--accent);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 5rem 5%;
+            background-color: var(--light);
+            text-align: center;
+        }
+        
+        .testimonials h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 3rem;
+        }
+        
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .testimonial {
+            padding: 2rem;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin: 1rem;
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 5rem 5%;
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-section p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 5%;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background-color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+        
+        /* Category Filters */
+        .category-filter {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-button {
+            padding: 0.5rem 1.5rem;
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .filter-button:hover, .filter-button.active {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .about {
+                flex-direction: column;
+            }
+            
+            .about-content {
+                padding-right: 0;
+                margin-bottom: 2rem;
+            }
+            
+            header {
+                padding: 1rem 5%;
+            }
+            
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!--<div class="logo">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f6e55285-66e6-4c4f-9320-cf7e0113ee38.png" alt="Logo de Studio Lens - Cámara fotográfica minimalista en tonos dorados">
+            <h1>Studio Lens</h1>
+        </div>-->
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#about">Sobre Nosotros</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#portfolio">Portafolio</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h2>Nuestra Historia</h2>
+            <p>Conoce el equipo, filosofía y pasión que hay detrás de cada fotografía que creamos en Studio Lens</p>
+        </div>
+    </section>
+
+    <section class="about-expanded" id="about">
+        <div class="about-content">
+            <h2>Sobre Studio Lens</h2>
+            <p>Fundado en 2010, Studio Lens se ha convertido en uno de los estudios fotográficos más reconocidos de la región. Nuestro equipo de fotógrafos profesionales combina técnica, arte y pasión para crear imágenes únicas.</p>
+            <p>Creemos que cada sesión fotográfica es una oportunidad para contar una historia, capturar emociones auténticas y crear algo que trascienda en el tiempo.</p>
+            <p class="about-signature">Juan Pérez - Fotógrafo principal</p>
+            <a href="#servicios" class="cta-button">Nuestros servicios</a>
+        </div>
+        <div class="about-image">
+            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1e118e12-3ffc-4810-b546-330644a3a882.png" alt="Fotógrafo profesional trabajando en estudio con equipo de iluminación profesional">
+        </div>
+    </section>
+
+    <section class="services" id="servicios">
+        <h2>Nuestros Servicios</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">📷</div>
+                <h3>Bodas</h3>
+                <p>Paquetes completos para capturar cada detalle de tu día especial, desde la preparación hasta el último baile.</p>
+                <a href="#" class="service-link">Ver portfolio →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">👨‍👩‍👧</div>
+                <h3>Retratos Familiares</h3>
+                <p>Sesiones en estudio o exteriores para capturar la esencia y conexión de tu familia, en cualquier etapa.</p>
+                <a href="#" class="service-link">Ver portfolio →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">👔</div>
+                <h3>Retratos Profesionales</h3>
+                <p>Imágenes corporativas que comunican profesionalismo y autenticidad para tu marca personal.</p>
+                <a href="#" class="service-link">Ver portfolio →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💍</div>
+                <h3>Eventos Sociales</h3>
+                <p>Cobertura completa de tus celebraciones importantes, desde quinceañeras hasta aniversarios.</p>
+                <a href="#" class="service-link">Ver portfolio →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🛍️</div>
+                <h3>Productos</h3>
+                <p>Fotografía profesional para catalogo y publicidad que resalta las cualidades de tus productos.</p>
+                <a href="#" class="service-link">Ver portfolio →</a>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎭</div>
+                <h3>Book Personal</h3>
+                <p>Sesiones creativas diseñadas especialmente para modelos, actores y personas que buscan imágenes profesionales.</p>
+                <a href="#" class="service-link">Ver portfolio →</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="container">
+            <h2>Nuestro Equipo</h2>
+            <p class="team-description">Conoce a los profesionales detrás de cada sesión fotográfica</p>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2e9cf309-3035-4707-ab6d-8614141f3bca.png" alt="Juan Pérez - Fotógrafo principal">
+                    <h3>Juan Pérez</h3>
+                    <p>Fotógrafo Principal</p>
+                    <p>15 años de experiencia en fotografía artística y documental</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cc58cf04-6c01-42da-8a9d-b28f7f39c499.png" alt="María Gómez - Editora digital">
+                    <h3>María Gómez</h3>
+                    <p>Editora Digital</p>
+                    <p>Especialista en post-producción y retoque fotográfico</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3d06d72a-f156-4632-90b5-6042427cc5bf.png" alt="Carlos Ríos - Técnico de iluminación">
+                    <h3>Carlos Ríos</h3>
+                    <p>Técnico de Iluminación</p>
+                    <p>Experto en manejo de luz natural y artificial</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials" id="testimonios">
+        <h2>Lo que dicen nuestros clientes</h2>
+        <div class="testimonial-slider">
+            <div class="testimonial">
+                <div class="testimonial-content">
+                    "Las fotografías de nuestra boda superaron todas nuestras expectativas. Studio Lens capturó cada momento especial con tanta emoción y belleza que cada vez que vemos las fotos parece que estamos reviviendo ese día."
+                </div>
+                <div class="testimonial-author">- Laura y Miguel</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="contacto">
+        <h2>¿Listo para crear algo increíble juntos?</h2>
+        <p>Contáctanos para programar una consulta gratuita y discutir cómo podemos ayudarte a capturar tus momentos importantes.</p>
+        <a href="#" class="cta-button">Contáctanos</a>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Studio Lens</h3>
+                <p>Especialistas en fotografía creativa y profesional para todos los momentos importantes de tu vida.</p>
+                <!--<div class="social-links">
+                    <a href="#"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f24679fc-3020-4bdd-bcdf-3eee2add773f.png" alt="Icono Facebook - Enlace a perfil social"></a>
+                    <a href="#"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dbc296c1-8cc5-4cb3-b6ee-605cdabad94f.png" alt="Icono Instagram - Enlace a perfil social"></a>
+                    <a href="#"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8fab89f2-8d77-4d75-85f7-990dc67dafdc.png" alt="Icono Pinterest - Enlace a perfil social"></a>
+                </div>-->
+            </div>
+            <div class="footer-column">
+                <h3>Servicios</h3>
+                <ul>
+                    <li><a href="#">Bodas</a></li>
+                    <li><a href="#">Retratos Familiares</a></li>
+                    <li><a href="#">Retratos Profesionales</a></li>
+                    <li><a href="#">Fotografía de Productos</a></li>
+                    <li><a href="#">Book Personal</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Enlaces Rápidos</h3>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#about">Sobre Nosotros</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#portfolio">Portafolio</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <p>Calle Principal 123<br>
+                Ciudad, Estado<br>
+                Tel: (555) 123-4567<br>
+                email: info@studiolens.com</p>
+                <p>Horario:<br>
+                Lunes a Viernes: 9am - 6pm<br>
+                Sábados: 10am - 2pm</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2023 Studio Lens. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Efecto scroll suave para los enlaces del menú
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Cambio de estilo del header al hacer scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'var(--primary)';
+                header.style.padding = '0.5rem 5%';
+            } else {
+                header.style.background = 'rgba(51, 48, 61, 0.9)';
+                header.style.padding = '1rem 5%';
+            }
+        });
+
+        // Simulador de slider de testimonios
+        let currentTestimonial = 0;
+        const testimonials = [
+            {
+                content: "Las fotografías de nuestra boda superaron todas nuestras expectativas. Studio Lens capturó cada momento especial con tanta emoción y belleza que cada vez que vemos las fotos parece que estamos reviviendo ese día.",
+                author: "- Laura y Miguel"
+            },
+            {
+                content: "Increíble trabajo con nuestras fotos familiares. Lograron capturar exactamente la personalidad de cada miembro de la familia y la conexión entre nosotros. Recomiendo Studio Lens 100%.",
+                author: "- Familia Rodríguez"
+            },
+            {
+                content: "Necesitaba fotos profesionales para mi marca personal y el resultado fue excelente. Me sentí muy cómoda durante la sesión y las fotos han tenido un gran impacto en mi presencia profesional en línea.",
+                author: "- Dra. Ana Martínez"
+            }
+        ];
+
+        function changeTestimonial() {
+            const testimonialContainer = document.querySelector('.testimonial');
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            
+            testimonialContainer.innerHTML = `
+                <div class="testimonial-content">
+                    "${testimonials[currentTestimonial].content}"
+                </div>
+                <div class="testimonial-author">${testimonials[currentTestimonial].author}</div>
+            `;
+        }
+
+        // Cambiar testimonial cada 6 segundos
+        setInterval(changeTestimonial, 6000);
+    </script>
+</body>
+</html>
