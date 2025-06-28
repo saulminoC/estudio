@@ -774,113 +774,137 @@
         </div>
     </section>
 
-    <section class="about-expanded" id="about">
-        <div class="about-content">
-            <h2>Sobre Studio Lens</h2>
-            <p>Fundado en 2010, Studio Lens se ha convertido en uno de los estudios fotográficos más reconocidos de la región. Nuestro equipo de fotógrafos profesionales combina técnica, arte y pasión para crear imágenes únicas.</p>
-            <p>Creemos que cada sesión fotográfica es una oportunidad para contar una historia, capturar emociones auténticas y crear algo que trascienda en el tiempo.</p>
-            <p class="about-signature">Juan Pérez - Fotógrafo principal</p>
-            <a href="#servicios" class="cta-button">Nuestros servicios</a>
-        </div>
-        <div class="about-image">
-            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/1e118e12-3ffc-4810-b546-330644a3a882.png" alt="Fotógrafo profesional trabajando en estudio con equipo de iluminación profesional">
-        </div>
-    </section>
-
-    <main class="blog-main" id="blog">
-        <div class="container">
-            <h1>Últimas Publicaciones</h1>
-            <div class="blog-posts">
-                <article class="blog-post">
-                    <div class="post-image">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/832b4c1e-87ee-46b4-8afc-070379d72019.png" alt="Fotógrafo tomando imagen en una boda">
-                    </div>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span>15 Oct 2023</span>
-                            <span>5 min lectura</span>
-                        </div>
-                        <h3>Consejos para una sesión de fotos de boda perfecta</h3>
-                        <p>Aprende cómo prepararte para tu gran día y obtener las mejores fotografías que atesorarás toda la vida.</p>
-                        <a href="#" class="read-more">Leer más →</a>
-                    </div>
-                </article>
-            <article class="blog-post">
-                    <div class="post-image">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/a223ac8b-b4c2-4d27-a9d6-d5fdad303430.png" alt="Familia posando para fotos en el parque">
-                    </div>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span>5 Oct 2023</span>
-                            <span>4 min lectura</span>
-                        </div>
-                        <h3>Cómo vestir para tu sesión de fotos familiar</h3>
-                        <p>Guía completa para coordinar los outfits y colores para obtener fotos armoniosas y naturales.</p>
-                        <a href="#" class="read-more">Leer más →</a>
-                    </div>
-                </article>
+<section class="contact-section">
+    <div class="contact-container">
+        <div class="contact-form">
+            <h2>Envíanos un mensaje</h2>
+            <p>Completa el formulario y te contactaremos lo antes posible para programar tu sesión.</p>
+            
+            <form action="#" method="POST">
+                <div class="form-group">
+                    <label for="nombre">Nombre completo *</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control" required>
+                </div>
                 
-                <article class="blog-post">
-                    <div class="post-image">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/e90e807f-c58a-499f-b82a-aab49de80bd0.png" alt="Equipo fotográfico profesional en estudio">
+                <div class="form-group">
+                    <label for="email">Correo electrónico *</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" name="telefono" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="servicio">Tipo de servicio</label>
+                    <select id="servicio" name="servicio" class="form-control">
+                        <option value="">Selecciona un servicio</option>
+                        <option value="bodas">Fotografía de Bodas</option>
+                        <option value="retratos-familiares">Retratos Familiares</option>
+                        <option value="retratos-profesionales">Retratos Profesionales</option>
+                        <option value="productos">Fotografía de Productos</option>
+                        <option value="book-personal">Book Personal</option>
+                        <option value="eventos">Eventos Especiales</option>
+                        <option value="otro">Otro</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="fecha">Fecha tentativa del evento</label>
+                    <input type="date" id="fecha" name="fecha" class="form-control">
+                </div>
+                
+                <div class="form-group">
+                    <label for="presupuesto">Presupuesto aproximado</label>
+                    <select id="presupuesto" name="presupuesto" class="form-control">
+                        <option value="">Selecciona un rango</option>
+                        <option value="500-1000">$500 - $1,000</option>
+                        <option value="1000-2500">$1,000 - $2,500</option>
+                        <option value="2500-5000">$2,500 - $5,000</option>
+                        <option value="5000+">$5,000+</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mensaje">Cuéntanos sobre tu proyecto *</label>
+                    <textarea id="mensaje" name="mensaje" class="form-control" placeholder="Describe tu visión, el estilo que buscas, número de personas, ubicación preferida, y cualquier detalle especial que quieras compartir..." required></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Enviar mensaje</button>
+            </form>
+        </div>
+        
+        <div class="contact-info">
+            <h2>Información de contacto</h2>
+            
+            <div class="info-item">
+                <div class="info-icon">📍</div>
+                <div>
+                    <h4>Ubicación</h4>
+                    <p>Calle Principal 123<br>
+                    Ciudad, Estado<br>
+                    Código Postal 12345</p>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-icon">📞</div>
+                <div>
+                    <h4>Teléfono</h4>
+                    <p>(555) 123-4567</p>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-icon">✉️</div>
+                <div>
+                    <h4>Email</h4>
+                    <p>info@studiolens.com<br>
+                    consultas@studiolens.com</p>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-icon">🕒</div>
+                <div>
+                    <h4>Horarios de atención</h4>
+                    <p>Lunes a Viernes: 9:00 AM - 6:00 PM<br>
+                    Sábados: 10:00 AM - 2:00 PM<br>
+                    Domingos: Solo citas programadas</p>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-icon">💬</div>
+                <div>
+                    <h4>Redes sociales</h4>
+                    <p>Síguenos para ver nuestro trabajo más reciente y obtener inspiración para tu sesión.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">📘</a>
+                        <a href="#" title="Instagram">📷</a>
+                        <a href="#" title="Pinterest">📌</a>
+                        <a href="#" title="WhatsApp">💬</a>
                     </div>
-                    <div class="post-content">
-                        <div class="post-meta">
-                            <span>25 Sep 2023</span>
-                            <span>7 min lectura</span>
-                        </div>
-                        <h3>Nuevas tendencias en fotografía de producto para 2023</h3>
-                        <p>Descubre las técnicas y estilos que están marcando tendencia este año en fotografía comercial.</p>
-                        <a href="#" class="read-more">Leer más →</a>
-                    </div>
-                </article>
+                </div>
+            </div>
+            
+            <div class="info-item">
+                <div class="info-icon">⚡</div>
+                <div>
+                    <h4>Respuesta rápida</h4>
+                    <p>Respondemos a todos los mensajes en un plazo máximo de 24 horas. Para consultas urgentes, contáctanos directamente por teléfono.</p>
+                </div>
             </div>
         </div>
-    </main>
+    </div>
+</section>
 
-    <section class="team-section">
-        <div class="container">
-            <h2>Nuestro Equipo</h2>
-            <p class="team-description">Conoce a los profesionales detrás de cada sesión fotográfica</p>
-            <div class="team-grid">
-                <div class="team-member">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/2e9cf309-3035-4707-ab6d-8614141f3bca.png" alt="Juan Pérez - Fotógrafo principal">
-                    <h3>Juan Pérez</h3>
-                    <p>Fotógrafo Principal</p>
-                    <p>15 años de experiencia en fotografía artística y documental</p>
-                </div>
-                <div class="team-member">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/cc58cf04-6c01-42da-8a9d-b28f7f39c499.png" alt="María Gómez - Editora digital">
-                    <h3>María Gómez</h3>
-                    <p>Editora Digital</p>
-                    <p>Especialista en post-producción y retoque fotográfico</p>
-                </div>
-                <div class="team-member">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3d06d72a-f156-4632-90b5-6042427cc5bf.png" alt="Carlos Ríos - Técnico de iluminación">
-                    <h3>Carlos Ríos</h3>
-                    <p>Técnico de Iluminación</p>
-                    <p>Experto en manejo de luz natural y artificial</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="testimonials" id="testimonios">
-        <h2>Lo que dicen nuestros clientes</h2>
-        <div class="testimonial-slider">
-            <div class="testimonial">
-                <div class="testimonial-content">
-                    "Las fotografías de nuestra boda superaron todas nuestras expectativas. Studio Lens capturó cada momento especial con tanta emoción y belleza que cada vez que vemos las fotos parece que estamos reviviendo ese día."
-                </div>
-                <div class="testimonial-author">- Laura y Miguel</div>
-            </div>
-        </div>
-    </section>
 
     <section class="cta-section" id="contacto">
         <h2>¿Listo para crear algo increíble juntos?</h2>
         <p>Contáctanos para programar una consulta gratuita y discutir cómo podemos ayudarte a capturar tus momentos importantes.</p>
-        <a href="#" class="cta-button">Contáctanos</a>
+        <a href="/estudio/Frontend/web/cliente/contacto.html" class="cta-button">Contáctanos</a>
     </section>
 
     <footer>
