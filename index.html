@@ -8,14 +8,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/estudio/Frontend/css/cliente/style.css">
+    <link rel="stylesheet" href="/estudio/Frontend/css/auth.css">
     <script src="/estudio/Frontend/js/script.js" defer></script>
+    <script src="/estudio/Frontend/js/auth.js" defer></script>
 </head>
 <body>
     <header>
-        <!--<div class="logo">
-            <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f6e55285-66e6-4c4f-9320-cf7e0113ee38.png" alt="Logo de Studio Lens - Cámara fotográfica minimalista en tonos dorados">
-            <h1>Studio Lens</h1>
-        </div>-->
         <nav>
             <ul>
                 <li><a href="/estudio/index.html">Inicio</a></li>
@@ -24,9 +22,42 @@
                 <li><a href="/estudio/Frontend/web/cliente/portafolio.html">Portafolio</a></li>
                 <li><a href="/estudio/Frontend/web/cliente/blog.html">Blog</a></li>
                 <li><a href="/estudio/Frontend/web/cliente/contacto.html">Contacto</a></li>
+                <li><a href="/estudio/Frontend/web/cliente/reservas.html">reservar</a></li>
+                <li><a href="#" id="authBtn">Iniciar Sesión</a></li>
             </ul>
         </nav>
     </header>
+
+    <!-- Modal de Login/Registro -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            
+            <!-- Formulario de Login -->
+            <div id="loginForm" class="auth-form active">
+                <h2>Iniciar Sesión</h2>
+                <form id="loginFormElement">
+                    <input type="email" id="loginEmail" placeholder="Correo electrónico" required>
+                    <input type="password" id="loginPassword" placeholder="Contraseña" required>
+                    <button type="submit">Iniciar Sesión</button>
+                </form>
+                <p>¿No tienes cuenta? <a href="#" id="showRegister">Regístrate aquí</a></p>
+            </div>
+
+            <!-- Formulario de Registro -->
+            <div id="registerForm" class="auth-form">
+                <h2>Registrarse</h2>
+                <form id="registerFormElement">
+                    <input type="text" id="registerName" placeholder="Nombre completo" required>
+                    <input type="email" id="registerEmail" placeholder="Correo electrónico" required>
+                    <input type="password" id="registerPassword" placeholder="Contraseña" required>
+                    <input type="password" id="confirmPassword" placeholder="Confirmar contraseña" required>
+                    <button type="submit">Registrarse</button>
+                </form>
+                <p>¿Ya tienes cuenta? <a href="#" id="showLogin">Inicia sesión aquí</a></p>
+            </div>
+        </div>
+    </div>
 
     <section class="hero" id="inicio">
         <div class="hero-content">
@@ -151,11 +182,6 @@
             <div class="footer-column">
                 <h3>Studio Lens</h3>
                 <p>Especialistas en fotografía creativa y profesional para todos los momentos importantes de tu vida.</p>
-                <!--<div class="social-links">
-                    <a href="#"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f24679fc-3020-4bdd-bcdf-3eee2add773f.png" alt="Icono Facebook - Enlace a perfil social"></a>
-                    <a href="#"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/dbc296c1-8cc5-4cb3-b6ee-605cdabad94f.png" alt="Icono Instagram - Enlace a perfil social"></a>
-                    <a href="#"><img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/8fab89f2-8d77-4d75-85f7-990dc67dafdc.png" alt="Icono Pinterest - Enlace a perfil social"></a>
-                </div>-->
             </div>
             <div class="footer-column">
                 <h3>Servicios</h3>
@@ -176,6 +202,7 @@
                     <li><a href="/estudio/Frontend/web/cliente/portafolio.html">Portafolio</a></li>
                     <li><a href="/estudio/Frontend/web/cliente/blog.html">Blog</a></li>
                     <li><a href="/estudio/Frontend/web/cliente/contacto.html">Contacto</a></li>
+                    <li><a href="/estudio/Frontend/web/cliente/reservas.html">reservar</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -195,4 +222,3 @@
     </footer>
 </body>
 </html>
-
