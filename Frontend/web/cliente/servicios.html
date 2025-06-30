@@ -197,9 +197,9 @@
             </div>
             <div class="footer-column">
                 <h3>Contacto</h3>
-                <p>Calle Principal 123<br>
-                Ciudad, Estado<br>
-                Tel: (555) 123-4567<br>
+                <p>Calle Siempre Viva<br>
+                Puebla, Puebla<br>
+                Tel: (222) 391 2857<br>
                 email: info@studiolens.com</p>
                 <p>Horario:<br>
                 Lunes a Viernes: 9am - 6pm<br>
@@ -266,6 +266,40 @@
 
         // Cambiar testimonial cada 6 segundos
         setInterval(changeTestimonial, 6000);
+
+        document.addEventListener('DOMContentLoaded', () => {
+  const grid = document.querySelector('.services-grid.detailed');
+
+  async function loadPackages() {
+    try {
+      const res = await fetch('/estudio/Backend/paquetes/get_paquetes.php');
+      const paquetes = await res.json();
+      grid.innerHTML = paquetes.map(pkg => {
+        const features = pkg.incluye
+          ? pkg.incluye.split(',').map(i => `<li>${i.trim()}</li>`).join('')
+          : '';
+        return `
+          <div class="service-card">
+            <div class="service-icon">📦</div>
+            <h3>${pkg.nombre}</h3>
+            <p>${pkg.descripcion}</p>
+            <ul class="service-features">
+              <li>Sesión de ${pkg.duracion} hora${pkg.duracion>1?'s':''}</li>
+              ${features}
+            </ul>
+            <div class="service-price">$${parseFloat(pkg.precio).toLocaleString()} USD</div>
+            <a href="#contacto" class="cta-button">Reservar ahora</a>
+          </div>
+        `;
+      }).join('');
+    } catch (e) {
+      console.error('Error cargando paquetes:', e);
+      grid.innerHTML = '<p>Lo sentimos, hubo un error al cargar los servicios.</p>';
+    }
+  }
+
+  loadPackages();
+});
     </script>
 </body>
 </html>

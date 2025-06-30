@@ -142,9 +142,9 @@
             </div>
             <div class="footer-column">
                 <h3>Contacto</h3>
-                <p>Calle Principal 123<br>
-                Ciudad, Estado<br>
-                Tel: (555) 123-4567<br>
+                <p>Calle Siempre Viva<br>
+                Puebla, Puebla<br>
+                Tel: (222) 391 2857<br>
                 email: info@studiolens.com</p>
                 <p>Horario:<br>
                 Lunes a Viernes: 9am - 6pm<br>
@@ -211,6 +211,32 @@
 
         // Cambiar testimonial cada 6 segundos
         setInterval(changeTestimonial, 6000);
+
+        document.addEventListener('DOMContentLoaded', async () => {
+  const container = document.querySelector('.blog-posts');
+  try {
+    const res   = await fetch('/estudio/Backend/blog/get_blog.php');
+    const posts = await res.json();
+
+    container.innerHTML = posts.map(p => `
+      <article class="blog-post">
+        <div class="post-image">
+          ${p.imagen ? `<img src="${p.imagen}" alt="${p.titulo}">` : ''}
+        </div>
+        <div class="post-content">
+          <div class="post-meta">
+            <span>${p.fecha}</span>
+          </div>
+          <h3>${p.titulo}</h3>
+          <p>${p.content.substring(0, 150)}…</p>
+        </div>
+      </article>
+    `).join('');
+  } catch (e) {
+    console.error('Error cargando blog:', e);
+    container.innerHTML = '<p>No hay publicaciones disponibles.</p>';
+  }
+});
     </script>
 </body>
 </html>

@@ -151,7 +151,7 @@
                 <div class="data-table">
                     <div class="table-header">
                         <h2>Citas y Reservas</h2>
-                        <button class="btn btn-primary" onclick="openModal('appointmentModal')">Nueva Cita</button>
+                        <!--<button class="btn btn-primary" onclick="openModal('appointmentModal')">Nueva Cita</button>-->
                     </div>
                     <table>
                         <thead>
@@ -417,44 +417,50 @@
             </div>
             
             <!-- Blog Modal -->
-            <div id="blogModal" class="modal">
-                <div class="modal-content">
-                    <span class="close" onclick="closeModal('blogModal')">&times;</span>
-                    <h2>Nueva Entrada</h2>
-                    <form id="blog-form" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label>Título</label>
-                            <input type="text" name="title" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Contenido</label>
-                            <textarea name="content" class="form-control" rows="8" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Imagen destacada</label>
-                            <input type="file" name="featured_image" class="form-control" accept="image/*">
-                        </div>
-                        <div class="form-group">
-                            <label>Categoría</label>
-                            <select name="category" class="form-control" required>
-                                <option value="">Seleccionar...</option>
-                                <option value="tendencias">Tendencias</option>
-                                <option value="consejos">Consejos</option>
-                                <option value="eventos">Eventos</option>
-                                <option value="tutoriales">Tutoriales</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Estado</label>
-                            <select name="status" class="form-control">
-                                <option value="publicado">Publicado</option>
-                                <option value="borrador">Borrador</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Publicar</button>
-                    </form>
-                </div>
-            </div>
+<div id="blogModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('blogModal')">&times;</span>
+    <h2>Nueva Entrada</h2>
+    <form id="blog-form" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="blog-title">Título</label>
+        <input type="text" id="blog-title" name="title" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label for="blog-content">Contenido</label>
+        <textarea id="blog-content" name="content" class="form-control" rows="8" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="blog-image">URL Imagen Destacada</label>
+        <input type="text" id="blog-image" name="image" class="form-control" placeholder="https://ejemplo.com/mi-imagen.jpg">
+      </div>
+
+      <div class="form-group">
+        <label for="blog-category">Categoría</label>
+        <select id="blog-category" name="category" class="form-control">
+          <option value="">Seleccionar...</option>
+          <option value="tendencias">Tendencias</option>
+          <option value="consejos">Consejos</option>
+          <option value="eventos">Eventos</option>
+          <option value="tutoriales">Tutoriales</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="blog-status">Estado</label>
+        <select id="blog-status" name="status" class="form-control" required>
+          <option value="publicado">Publicado</option>
+          <option value="borrador">Borrador</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Publicar</button>
+    </form>
+  </div>
+</div>
+
         </main>
     </div>
     
@@ -617,6 +623,10 @@
             }
         });
     </script>
+    <script src="/estudio/Frontend/js/reservas/reservas.js" defer></script>
+    <script src="/estudio/Frontend/js/blog/blog.js" defer></script>
+    <script src="/estudio/Frontend/js/blog/admin/blog.js" defer></script>
+
 </body>
 </html>
 

@@ -224,9 +224,9 @@
             </div>
             <div class="footer-column">
                 <h3>Contacto</h3>
-                <p>Calle Principal 123<br>
-                Ciudad, Estado<br>
-                Tel: (555) 123-4567<br>
+                <p>Calle Siempre Viva<br>
+                ¨Puebla, Puebla<br>
+                Tel: (222) 391 2857<br>
                 email: info@studiolens.com</p>
                 <p>Horario:<br>
                 Lunes a Viernes: 9am - 6pm<br>
@@ -237,8 +237,7 @@
             <p>© 2023 Studio Lens. Todos los derechos reservados.</p>
         </div>
     </footer>
-
-    <script>
+<script>
 class ReservationSystem {
     constructor() {
         this.currentDate = new Date();
@@ -252,7 +251,7 @@ class ReservationSystem {
             '2025-01-20': ['10:00', '16:00'],
             '2025-01-25': ['11:00', '15:00'],
             '2025-02-05': ['09:00', '13:00'],
-            '2025-02-14': ['10:00', '14:00', '16:00']  // Valentine's Day - busy day
+            '2025-02-14': ['10:00', '14:00', '16:00']
         };
 
         this.availableTimeSlots = [
@@ -264,13 +263,7 @@ class ReservationSystem {
             'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
         ];
 
-        this.serviceNames = {
-            'wedding': 'Sesión de Bodas',
-            'portrait': 'Retratos Profesionales',
-            'family': 'Retratos Familiares',
-            'product': 'Fotografía de Productos',
-            'personal': 'Book Personal'
-        };
+        this.serviceNames = {};
 
         this.init();
     }
@@ -278,6 +271,8 @@ class ReservationSystem {
     init() {
         this.renderCalendar();
         this.bindEvents();
+        // Cargar paquetes después de inicializar
+        this.loadPackageOptions();
     }
 
     bindEvents() {
@@ -285,17 +280,19 @@ class ReservationSystem {
         document.getElementById('prevMonth').addEventListener('click', () => this.previousMonth());
         document.getElementById('nextMonth').addEventListener('click', () => this.nextMonth());
 
-        // Service selection
-        document.querySelectorAll('input[name="service"]').forEach(radio => {
-            radio.addEventListener('change', (e) => this.selectService(e));
-        });
-
         // Form submission
         document.getElementById('bookingForm').addEventListener('submit', (e) => this.submitBooking(e));
 
         // Form validation
         document.querySelectorAll('#bookingForm input, #bookingForm textarea').forEach(input => {
             input.addEventListener('input', () => this.validateForm());
+        });
+    }
+
+    // Método para bind service events - separado para poder llamarlo después de cargar paquetes
+    bindServiceEvents() {
+        document.querySelectorAll('input[name="service"]').forEach(radio => {
+            radio.addEventListener('change', (e) => this.selectService(e));
         });
     }
 
@@ -423,16 +420,24 @@ class ReservationSystem {
         this.validateForm();
     }
 
+    // MÉTODO CORREGIDO: selectService
     selectService(event) {
         const option = event.target.closest('.service-option');
+        const input = event.target;
+        
+        // Limpiar selecciones previas
         document.querySelectorAll('.service-option').forEach(opt => opt.classList.remove('selected'));
         option.classList.add('selected');
         
+        // Obtener datos del input - CORREGIDO: acceso a dataset
         this.selectedService = {
-            type:     event.target.value,
-            price:    parseFloat(event.target.dataset.price),
-            duration: parseInt(event.target.dataset.duration)
+            id: input.value,
+            name: input.dataset.name,  // Acceso correcto a data-name
+            price: parseFloat(input.dataset.price),
+            duration: parseInt(input.dataset.duration)
         };
+
+        console.log('Servicio seleccionado:', this.selectedService); // Debug
 
         this.updateSummary();
         this.validateForm();
@@ -443,12 +448,12 @@ class ReservationSystem {
         if (this.selectedService || this.selectedDate || this.selectedTime) {
             summary.style.display = 'block';
             if (this.selectedService) {
-                document.getElementById('summaryService').textContent   = this.serviceNames[this.selectedService.type];
-                document.getElementById('summaryPrice').textContent     = `$${this.selectedService.price.toLocaleString()}`;
-                document.getElementById('summaryDuration').textContent  = `${this.selectedService.duration} hora${this.selectedService.duration > 1 ? 's' : ''}`;
+                document.getElementById('summaryService').textContent = this.selectedService.name;
+                document.getElementById('summaryPrice').textContent = `$${this.selectedService.price.toLocaleString()}`;
+                document.getElementById('summaryDuration').textContent = `${this.selectedService.duration} hora${this.selectedService.duration > 1 ? 's' : ''}`;
             }
             if (this.selectedDate) {
-                document.getElementById('summaryDate').textContent = this.selectedDate.toLocaleDateString('es-ES',{
+                document.getElementById('summaryDate').textContent = this.selectedDate.toLocaleDateString('es-ES', {
                     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
                 });
             }
@@ -460,14 +465,6 @@ class ReservationSystem {
         }
     }
 
-    validateForm() {
-        const name  = document.getElementById('clientName').value.trim();
-        const email = document.getElementById('clientEmail').value.trim();
-        const phone = document.getElementById('clientPhone').value.trim();
-        const btn   = document.getElementById('submitBtn');
-        btn.disabled = !(name && email && phone && this.selectedService && this.selectedDate && this.selectedTime);
-    }
-
     submitBooking(event) {
         event.preventDefault();
         if (!this.validateBookingData()) return;
@@ -475,21 +472,23 @@ class ReservationSystem {
         this.showMessage('Procesando reserva...', 'info');
 
         const payload = {
-            service:    this.selectedService.type,
-            date:       this.formatDate(this.selectedDate),
-            time:       this.selectedTime,
-            duration:   this.selectedService.duration,
-            price:      this.selectedService.price,
+            service: this.selectedService.name,
+            date: this.formatDate(this.selectedDate),
+            time: this.selectedTime,
+            duration: this.selectedService.duration,
+            price: this.selectedService.price,
             clientName: document.getElementById('clientName').value.trim(),
-            clientEmail:document.getElementById('clientEmail').value.trim(),
-            clientPhone:document.getElementById('clientPhone').value.trim(),
-            clientNotes:document.getElementById('clientNotes').value.trim()
+            clientEmail: document.getElementById('clientEmail').value.trim(),
+            clientPhone: document.getElementById('clientPhone').value.trim(),
+            clientNotes: document.getElementById('clientNotes').value.trim()
         };
 
+        console.log('Payload que se envía:', payload);
+
         fetch('/estudio/Backend/reservas/guardar_reservas.php', {
-            method:  'POST',
+            method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body:    JSON.stringify(payload)
+            body: JSON.stringify(payload)
         })
         .then(res => res.json())
         .then(json => {
@@ -506,8 +505,16 @@ class ReservationSystem {
         });
     }
 
+    validateForm() {
+        const name = document.getElementById('clientName').value.trim();
+        const email = document.getElementById('clientEmail').value.trim();
+        const phone = document.getElementById('clientPhone').value.trim();
+        const btn = document.getElementById('submitBtn');
+        btn.disabled = !(name && email && phone && this.selectedService && this.selectedDate && this.selectedTime);
+    }
+
     validateBookingData() {
-        const name  = document.getElementById('clientName').value.trim();
+        const name = document.getElementById('clientName').value.trim();
         const email = document.getElementById('clientEmail').value.trim();
         const phone = document.getElementById('clientPhone').value.trim();
 
@@ -566,16 +573,54 @@ class ReservationSystem {
         const occupied = this.occupiedSlots[dateStr] || [];
         return occupied.length < this.availableTimeSlots.length;
     }
+
+    // MÉTODO MOVIDO DENTRO DE LA CLASE
+    async loadPackageOptions() {
+        const container = document.querySelector('.service-options');
+        try {
+            const res = await fetch('/estudio/Backend/paquetes/get_paquetes.php');
+            const pkgs = await res.json();
+            
+            // Generar HTML con data-name correctamente
+            container.innerHTML = pkgs.map(pkg => `
+                <label class="service-option">
+                    <input type="radio"
+                           name="service"
+                           value="${pkg.id}"
+                           data-price="${pkg.precio}"
+                           data-duration="${pkg.duracion}"
+                           data-name="${pkg.nombre}">
+                    <div class="service-title">${pkg.nombre}</div>
+                    <div>${pkg.descripcion}</div>
+                    <div class="service-price">$${parseFloat(pkg.precio).toLocaleString()} USD</div>
+                </label>
+            `).join('');
+
+            // Actualizar serviceNames para referencia
+            this.serviceNames = pkgs.reduce((m, p) => {
+                m[p.id] = p.nombre;
+                return m;
+            }, {});
+
+            // IMPORTANTE: Re-bind events después de cargar dinámicamente
+            this.bindServiceEvents();
+
+        } catch (e) {
+            console.error('No se pudieron cargar los paquetes:', e);
+            this.showMessage('Error cargando servicios', 'error');
+        }
+    }
 }
 
 // Initialize on DOM load
+let reservationSystem;
 document.addEventListener('DOMContentLoaded', () => {
-    new ReservationSystem();
+    reservationSystem = new ReservationSystem();
 });
 
-// Smooth animations & mobile menu handlers… (idénticos a tu original)
+// ELIMINAR esta función ya que está integrada en la clase
+// async function loadPackageOptions() { ... }
+
 </script>
-
-
 </body>
 </html>

@@ -1,0 +1,8 @@
+Datos recibidos: {"date":"2025-07-01","time":"14:00","duration":70,"price":700,"clientName":"saul","clientEmail":"saulcartel12@gmail.com","clientPhone":"2223912857","clientNotes":"debugg"}
+Campos faltantes: service
+Datos recibidos: {"date":"2025-07-01","time":"10:00","duration":70,"price":700,"clientName":"saul","clientEmail":"saulcartel12@gmail.com","clientPhone":"2223912857","clientNotes":"budg"}
+Campos faltantes: service
+Datos recibidos: {"service":"2","date":"2025-07-01","time":"11:00","duration":70,"price":700,"clientName":"saul","clientEmail":"saulcartel12@gmail.com","clientPhone":"2223912857","clientNotes":"budgds"}
+Datos recibidos: {"date":"2025-07-01","time":"10:00","duration":4,"price":2500,"clientName":"saul","clientEmail":"saulcartel12@gmail.com","clientPhone":"2223912857","clientNotes":"qwe"}
+Campos faltantes: service
+Datos recibidos: {"service":"Snickers - Vaso 1L","date":"2025-07-01","time":"10:00","duration":70,"price":700,"clientName":"saul","clientEmail":"saulcartel12@gmail.com","clientPhone":"2223912857","clientNotes":"dub"}

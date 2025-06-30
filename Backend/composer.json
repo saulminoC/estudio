@@ -1,0 +1,12 @@
+{
+    "name": "saul/backend",
+    "authors": [
+        {
+            "name": "minosaul1",
+            "email": "saul.mino.serv@cruzrojapuebla.edu.mx"
+        }
+    ],
+    "require": {
+        "phpmailer/phpmailer": "^6.10"
+    }
+}
