@@ -9,9 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="/estudio/Frontend/css/admin/dashboard.css">
-    <style>
-
-    </style>
 </head>
 <body>
     <div class="dashboard-container">
@@ -101,28 +98,28 @@
                     <div class="stat-card">
                         <div class="stat-icon appointments">📅</div>
                         <div class="stat-info">
-                            <h3>12</h3>
+                            <h3 id="total-appointments">0</h3>
                             <p>Citas esta semana</p>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon packages">📦</div>
                         <div class="stat-info">
-                            <h3>5</h3>
+                            <h3 id="total-packages">0</h3>
                             <p>Paquetes activos</p>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon photos">🖼️</div>
                         <div class="stat-info">
-                            <h3>1,247</h3>
+                            <h3 id="total-photos">0</h3>
                             <p>Fotos en galerías</p>
                         </div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-icon contacts">📧</div>
                         <div class="stat-info">
-                            <h3>8</h3>
+                            <h3 id="total-contacts">0</h3>
                             <p>Consultas pendientes</p>
                         </div>
                     </div>
@@ -131,7 +128,7 @@
                 <div class="data-table">
                     <div class="table-header">
                         <h2>Próximas Citas</h2>
-                        <a href="#" class="btn btn-primary">Ver todas</a>
+                        <a href="#" class="btn btn-primary" onclick="switchSection('appointments')">Ver todas</a>
                     </div>
                     <table>
                         <thead>
@@ -142,25 +139,8 @@
                                 <th>Estado</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>María González</td>
-                                <td>Sesión de Pareja</td>
-                                <td>15 Jul, 2025 - 10:00 AM</td>
-                                <td><span class="status-badge status-confirmed">Confirmada</span></td>
-                            </tr>
-                            <tr>
-                                <td>Carlos Ruiz</td>
-                                <td>Fotografía Corporativa</td>
-                                <td>16 Jul, 2025 - 2:00 PM</td>
-                                <td><span class="status-badge status-pending">Pendiente</span></td>
-                            </tr>
-                            <tr>
-                                <td>Ana y Roberto</td>
-                                <td>Pre-boda</td>
-                                <td>18 Jul, 2025 - 4:00 PM</td>
-                                <td><span class="status-badge status-confirmed">Confirmada</span></td>
-                            </tr>
+                        <tbody id="upcoming-appointments">
+                            <!-- Se carga dinámicamente -->
                         </tbody>
                     </table>
                 </div>
@@ -185,31 +165,8 @@
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>María González</td>
-                                <td>maria@email.com<br>(555) 123-4567</td>
-                                <td>Sesión de Pareja</td>
-                                <td>15 Jul, 2025</td>
-                                <td>10:00 AM</td>
-                                <td><span class="status-badge status-confirmed">Confirmada</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-primary">Editar</button>
-                                    <button class="btn btn-sm btn-danger">Cancelar</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Carlos Ruiz</td>
-                                <td>carlos@empresa.com<br>(555) 987-6543</td>
-                                <td>Fotografía Corporativa</td>
-                                <td>16 Jul, 2025</td>
-                                <td>2:00 PM</td>
-                                <td><span class="status-badge status-pending">Pendiente</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-success">Confirmar</button>
-                                    <button class="btn btn-sm btn-primary">Editar</button>
-                                </td>
-                            </tr>
+                        <tbody id="appointments-table">
+                            <!-- Se carga dinámicamente -->
                         </tbody>
                     </table>
                 </div>
@@ -217,94 +174,59 @@
             
             <!-- Packages Section -->
             <section id="packages" class="content-section">
-                <div class="data-table">
-                    <div class="table-header">
-                        <h2>Paquetes</h2>
-                        <button class="btn btn-primary" onclick="openModal('packageModal')">Nuevo Paquete</button>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Precio</th>
-                                <th>Duración</th>
-                                <th>Incluye</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Boda Completa</td>
-                                <td>$2,500</td>
-                                <td>8 horas</td>
-                                <td>Ceremonia, recepción, 300+ fotos editadas</td>
-                                <td><span class="status-badge status-published">Activo</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-primary">Editar</button>
-                                    <button class="btn btn-sm btn-warning">Pausar</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Sesión Familiar</td>
-                                <td>$350</td>
-                                <td>2 horas</td>
-                                <td>Sesión exterior, 50+ fotos editadas</td>
-                                <td><span class="status-badge status-published">Activo</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-primary">Editar</button>
-                                    <button class="btn btn-sm btn-warning">Pausar</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+            <div class="section-header">
+                <h2>Paquetes</h2>
+                <button class="btn btn-primary" onclick="openModal('packageModal')">Nuevo Paquete</button>
+            </div>
+
+            <!-- Listado dinámico de paquetes -->
+            <div id="packages-list" class="cards-container">
+                <!-- Aquí se inyectarán las “cards” de cada paquete -->
+            </div>
             </section>
             
             <!-- Gallery Section -->
             <section id="gallery" class="content-section">
                 <div class="form-container">
                     <h2>Galerías</h2>
-                    <div class="upload-area" onclick="document.getElementById('file-input').click()">
-                        <p>📸 Arrastra y suelta imágenes aquí o haz clic para seleccionar</p>
-                        <input type="file" id="file-input" multiple accept="image/*" style="display: none;">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Categoría:</label>
-                        <select class="form-control">
-                            <option>Bodas</option>
-                            <option>Retratos Familiares</option>
-                            <option>Sesiones Profesionales</option>
-                            <option>Productos</option>
-                            <option>Eventos</option>
-                        </select>
-                    </div>
+                    <form id="gallery-form" enctype="multipart/form-data">
+                        <div class="upload-area" onclick="document.getElementById('gallery-files').click()">
+                            <p>📸 Arrastra y suelta imágenes aquí o haz clic para seleccionar</p>
+                            <input type="file" id="gallery-files" name="gallery_files[]" multiple accept="image/*" style="display: none;">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Título de la galería:</label>
+                            <input type="text" name="gallery_title" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Categoría:</label>
+                            <select name="gallery_category" class="form-control" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="bodas">Bodas</option>
+                                <option value="retratos">Retratos Familiares</option>
+                                <option value="profesional">Sesiones Profesionales</option>
+                                <option value="productos">Productos</option>
+                                <option value="eventos">Eventos</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Descripción:</label>
+                            <textarea name="gallery_description" class="form-control" rows="3"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Subir Galería</button>
+                    </form>
                 </div>
                 
                 <div class="data-table">
                     <div class="table-header">
                         <h2>Galerías Existentes</h2>
                     </div>
-                    <div class="gallery-grid">
-                        <div class="gallery-item">
-                            <img src="https://picsum.photos/300/300?random=1" alt="Galería 1">
-                            <div class="gallery-overlay">
-                                <button class="btn btn-primary btn-sm">Ver</button>
-                            </div>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="https://picsum.photos/300/300?random=2" alt="Galería 2">
-                            <div class="gallery-overlay">
-                                <button class="btn btn-primary btn-sm">Ver</button>
-                            </div>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="https://picsum.photos/300/300?random=3" alt="Galería 3">
-                            <div class="gallery-overlay">
-                                <button class="btn btn-primary btn-sm">Ver</button>
-                            </div>
-                        </div>
+                    <div class="gallery-grid" id="gallery-grid">
+                        <!-- Se carga dinámicamente -->
                     </div>
                 </div>
             </section>
@@ -326,27 +248,8 @@
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Tendencias en Fotografía de Bodas 2025</td>
-                                <td>20 Jun, 2025</td>
-                                <td><span class="status-badge status-published">Publicado</span></td>
-                                <td>342</td>
-                                <td>
-                                    <button class="btn btn-sm btn-primary">Editar</button>
-                                    <button class="btn btn-sm btn-warning">Despublicar</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Consejos para Sesiones Familiares</td>
-                                <td>15 Jun, 2025</td>
-                                <td><span class="status-badge status-draft">Borrador</span></td>
-                                <td>0</td>
-                                <td>
-                                    <button class="btn btn-sm btn-primary">Editar</button>
-                                    <button class="btn btn-sm btn-success">Publicar</button>
-                                </td>
-                            </tr>
+                        <tbody id="blog-table">
+                            <!-- Se carga dinámicamente -->
                         </tbody>
                     </table>
                 </div>
@@ -369,28 +272,8 @@
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Laura Martínez</td>
-                                <td>laura@email.com</td>
-                                <td>Fotografía de Productos</td>
-                                <td>28 Jun, 2025</td>
-                                <td><span class="status-badge status-pending">Pendiente</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-primary">Responder</button>
-                                    <button class="btn btn-sm btn-success">Crear Cita</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Pedro Sánchez</td>
-                                <td>pedro@email.com</td>
-                                <td>Boda</td>
-                                <td>27 Jun, 2025</td>
-                                <td><span class="status-badge status-confirmed">Respondido</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-primary">Ver</button>
-                                </td>
-                            </tr>
+                        <tbody id="contacts-table">
+                            <!-- Se carga dinámicamente -->
                         </tbody>
                     </table>
                 </div>
@@ -400,19 +283,27 @@
             <section id="albums" class="content-section">
                 <div class="form-container">
                     <h2>Álbumes por Cliente</h2>
-                    <div class="form-group">
-                        <label>Cliente:</label>
-                        <select class="form-control">
-                            <option>María González - Sesión de Pareja</option>
-                            <option>Carlos Ruiz - Fotografía Corporativa</option>
-                            <option>Ana y Roberto - Pre-boda</option>
-                        </select>
-                    </div>
-                    
-                    <div class="upload-area">
-                        <p>📁 Cargar álbum completo</p>
-                        <input type="file" multiple accept="image/*" style="display: none;">
-                    </div>
+                    <form id="album-form" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>Cliente:</label>
+                            <select name="client_id" class="form-control" id="client-select" required>
+                                <option value="">Seleccionar cliente...</option>
+                                <!-- Se carga dinámicamente -->
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Nombre del álbum:</label>
+                            <input type="text" name="album_name" class="form-control" required>
+                        </div>
+                        
+                        <div class="upload-area" onclick="document.getElementById('album-files').click()">
+                            <p>📁 Cargar álbum completo</p>
+                            <input type="file" id="album-files" name="album_files[]" multiple accept="image/*" style="display: none;">
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Subir Álbum</button>
+                    </form>
                 </div>
                 
                 <div class="data-table">
@@ -423,35 +314,15 @@
                         <thead>
                             <tr>
                                 <th>Cliente</th>
-                                <th>Sesión</th>
+                                <th>Álbum</th>
                                 <th>Fecha</th>
                                 <th>Fotos</th>
                                 <th>Estado</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>María González</td>
-                                <td>Sesión de Pareja</td>
-                                <td>15 Jul, 2025</td>
-                                <td>85 fotos</td>
-                                <td><span class="status-badge status-published">Entregado</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-primary">Ver</button>
-                                    <button class="btn btn-sm btn-warning">Compartir</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Carlos Ruiz</td>
-                                <td>Fotografía Corporativa</td>
-                                <td>10 Jul, 2025</td>
-                                <td>120 fotos</td>
-                                <td><span class="status-badge status-pending">En Edición</span></td>
-                                <td>
-                                    <button class="btn btn-sm btn-primary">Previsualizar</button>
-                                </td>
-                            </tr>
+                        <tbody id="albums-table">
+                            <!-- Se carga dinámicamente -->
                         </tbody>
                     </table>
                 </div>
@@ -463,41 +334,42 @@
                 <div class="modal-content">
                     <span class="close" onclick="closeModal('appointmentModal')">&times;</span>
                     <h2>Nueva Cita</h2>
-                    <form>
+                    <form id="appointment-form">
                         <div class="form-group">
                             <label>Nombre del Cliente</label>
-                            <input type="text" class="form-control" required>
+                            <input type="text" name="client_name" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" class="form-control" required>
+                            <input type="email" name="client_email" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Teléfono</label>
-                            <input type="tel" class="form-control" required>
+                            <input type="tel" name="client_phone" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Servicio</label>
-                            <select class="form-control" required>
+                            <select name="service" class="form-control" required>
                                 <option value="">Seleccionar...</option>
-                                <option>Sesión de Pareja</option>
-                                <option>Fotografía Corporativa</option>
-                                <option>Pre-boda</option>
-                                <option>Retrato Familiar</option>
-                                <option>Fotografía de Productos</option>
+                                <option value="pareja">Sesión de Pareja</option>
+                                <option value="corporativa">Fotografía Corporativa</option>
+                                <option value="preboda">Pre-boda</option>
+                                <option value="familiar">Retrato Familiar</option>
+                                <option value="productos">Fotografía de Productos</option>
+                                <option value="boda">Boda</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Fecha</label>
-                            <input type="date" class="form-control" required>
+                            <input type="date" name="appointment_date" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Hora</label>
-                            <input type="time" class="form-control" required>
+                            <input type="time" name="appointment_time" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Notas</label>
-                            <textarea class="form-control" rows="3"></textarea>
+                            <textarea name="notes" class="form-control" rows="3"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </form>
@@ -506,40 +378,42 @@
             
             <!-- Package Modal -->
             <div id="packageModal" class="modal">
-                <div class="modal-content">
-                    <span class="close" onclick="closeModal('packageModal')">&times;</span>
-                    <h2>Nuevo Paquete</h2>
-                    <form>
-                        <div class="form-group">
-                            <label>Nombre del Paquete</label>
-                            <input type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Descripción</label>
-                            <textarea class="form-control" rows="3" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Precio ($)</label>
-                            <input type="number" class="form-control" step="0.01" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Duración (horas)</label>
-                            <input type="number" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Incluye (separar por comas)</label>
-                            <textarea class="form-control" rows="3" placeholder="Ej: 50 fotos editadas, 2 cambios de vestuario, etc."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Estado</label>
-                            <select class="form-control">
-                                <option value="published">Activo</option>
-                                <option value="draft">Inactivo</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                    </form>
+            <div class="modal-content">
+                <span class="close" onclick="closeModal('packageModal')">&times;</span>
+                <h2>Nuevo Paquete</h2>
+                <form id="package-form">
+                <input type="hidden" name="id" value=""> <!-- para edición futura -->
+                <div class="form-group">
+                    <label>Nombre del Paquete</label>
+                    <input type="text" name="nombre" class="form-control" required>
                 </div>
+                <div class="form-group">
+                    <label>Descripción</label>
+                    <textarea name="descripcion" class="form-control" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Precio ($)</label>
+                    <input type="number" name="precio" class="form-control" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>Duración (horas)</label>
+                    <input type="number" name="duracion" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Incluye (separar por comas)</label>
+                    <textarea name="incluye" class="form-control" rows="3"
+                            placeholder="Ej: 50 fotos editadas, 2 cambios de vestuario, etc."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Estado</label>
+                    <select name="estado" class="form-control">
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
             </div>
             
             <!-- Blog Modal -->
@@ -547,33 +421,34 @@
                 <div class="modal-content">
                     <span class="close" onclick="closeModal('blogModal')">&times;</span>
                     <h2>Nueva Entrada</h2>
-                    <form>
+                    <form id="blog-form" enctype="multipart/form-data">
                         <div class="form-group">
                             <label>Título</label>
-                            <input type="text" class="form-control" required>
+                            <input type="text" name="title" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label>Contenido</label>
-                            <textarea class="form-control" rows="8" required></textarea>
+                            <textarea name="content" class="form-control" rows="8" required></textarea>
                         </div>
                         <div class="form-group">
                             <label>Imagen destacada</label>
-                            <input type="file" class="form-control" accept="image/*">
+                            <input type="file" name="featured_image" class="form-control" accept="image/*">
                         </div>
                         <div class="form-group">
-                            <label>Categorías</label>
-                            <select class="form-control" multiple>
-                                <option>Tendencias</option>
-                                <option>Consejos</option>
-                                <option>Eventos</option>
-                                <option>Tutoriales</option>
+                            <label>Categoría</label>
+                            <select name="category" class="form-control" required>
+                                <option value="">Seleccionar...</option>
+                                <option value="tendencias">Tendencias</option>
+                                <option value="consejos">Consejos</option>
+                                <option value="eventos">Eventos</option>
+                                <option value="tutoriales">Tutoriales</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Estado</label>
-                            <select class="form-control">
-                                <option value="published">Publicado</option>
-                                <option value="draft">Borrador</option>
+                            <select name="status" class="form-control">
+                                <option value="publicado">Publicado</option>
+                                <option value="borrador">Borrador</option>
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Publicar</button>
@@ -636,6 +511,65 @@
             document.body.style.overflow = 'auto'; // Re-enable scrolling
         }
         
+        // Cargar paquetes y pintarlos como cards
+        async function fetchPackages() {
+        try {
+            const res = await fetch('/estudio/Backend/paquetes/get_paquetes.php');
+            const paquetes = await res.json();
+            const container = document.getElementById('packages-list');
+            container.innerHTML = paquetes.map(pkg => {
+            // generar lista de “incluye”
+            const items = pkg.incluye
+                ? pkg.incluye.split(',').map(i=>`<li>${i.trim()}</li>`).join('')
+                : '';
+            return `
+            <div class="card package-card">
+                <h3>${pkg.nombre}</h3>
+                <p class="desc">${pkg.descripcion}</p>
+                <ul class="details">
+                <li>Sesión de ${pkg.duracion} hora${pkg.duracion>1?'s':''}</li>
+                ${items}
+                </ul>
+                <div class="price">$${parseFloat(pkg.precio).toLocaleString()} USD</div>
+                <button class="btn btn-primary" onclick="location.href='/estudio/Frontend/web/cliente/reservas.html'">
+                Reservar ahora
+                </button>
+            </div>`;
+            }).join('');
+        } catch(e) {
+            console.error('Error cargando paquetes', e);
+        }
+        }
+
+        // Enviar nuevo paquete
+        document.getElementById('package-form').addEventListener('submit', async e => {
+        e.preventDefault();
+        const form = e.target;
+        const data = Object.fromEntries(new FormData(form));
+        try {
+            const res = await fetch('/estudio/Backend/paquetes/guardar_paquete.php', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify(data)
+            });
+            const json = await res.json();
+            if (json.success) {
+            closeModal('packageModal');
+            form.reset();
+            fetchPackages();
+            } else {
+            alert('Error: ' + (json.error||''));
+            }
+        } catch(err) {
+            alert('Error de red: '+err.message);
+        }
+        });
+
+        // Inicializar
+        document.addEventListener('DOMContentLoaded', () => {
+        fetchPackages();
+        });
+
         // Close modal when clicking outside
         window.onclick = function(event) {
             document.querySelectorAll('.modal').forEach(modal => {
@@ -685,3 +619,5 @@
     </script>
 </body>
 </html>
+
+
